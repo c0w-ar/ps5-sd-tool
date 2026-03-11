@@ -104,6 +104,8 @@ int update_sd(user* user, savedata* sd) {
     sprintf(db_path, USER_SD_DB_PATH, user->user_id);
     char sql[400];
 
+    replace_char((char*) sd->main_title, '\'', ' ');
+
     sprintf(sql, SQL_USER_SAVEDATA_UPDATE,
         sd->main_title, sd->sub_title, sd->detail, sd->user_param,
         sd->blocks, sd->blocks, sd->blocks*0x40,
@@ -136,6 +138,8 @@ int insert_sd(user* user, savedata* sd) {
     char db_path[PATH_MAX];
     sprintf(db_path, USER_SD_DB_PATH, user->user_id);
     char sql[800];
+
+    replace_char((char*) sd->main_title, '\'', ' ');
 
     sprintf(sql, SQL_USER_SAVEDATA_INSERT,
         sd->title_id, sd->game_title_id, sd->dir_name, sd->main_title,
